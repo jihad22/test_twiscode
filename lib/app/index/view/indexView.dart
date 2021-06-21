@@ -136,114 +136,155 @@ class IndexView extends StatelessWidget {
     Get.bottomSheet(
       Container(
         color: Colors.white,
-        child: ListView.builder(
-          itemCount: controller.cartList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        width: 100,
-                        height: 150,
-                        child: controller.imageLoader(
-                          controller.cartList[index]['img'],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(right: 10)),
-                  Expanded(
-                    flex: 8,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: controller.cartList.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(controller.cartList[index]['merk'], style: TextStyle(fontSize: 30)),
-                        Container(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    children: [
-                                      controller.cartList[index]['price'] == null
-                                          ? Text(
-                                              "Rp 0",
-                                              style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
-                                            )
-                                          : Text(
-                                              "Rp ${controller.cartList[index]['price'] == null}",
-                                              style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
-                                            ),
-                                      controller.cartList[index]['condition'] == ""
-                                          ? Text("${controller.cartList[index]['condition']}")
-                                          : Text("-"),
-                                    ],
-                                  ),
-                                ),
+                        Expanded(
+                          flex: 4,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              width: 100,
+                              height: 150,
+                              child: controller.imageLoader(
+                                controller.cartList[index]['img'],
                               ),
-                              Expanded(
-                                flex: 8,
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        color: Colors.red,
-                                        width: 40,
-                                        height: 40,
-                                        child: InkWell(
-                                          onTap: () {
-                                            controller.decrementItem(index);
-                                          },
-                                          child: Icon(Icons.remove, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(right: 10)),
+                        Expanded(
+                          flex: 8,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(controller.cartList[index]['merk'], style: TextStyle(fontSize: 30)),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Column(
+                                          children: [
+                                            controller.cartList[index]['price'] == null
+                                                ? Text(
+                                                    "Rp 0",
+                                                    style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
+                                                  )
+                                                : Text(
+                                                    "Rp ${controller.cartList[index]['price'] == null}",
+                                                    style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
+                                                  ),
+                                            controller.cartList[index]['condition'] == ""
+                                                ? Text("${controller.cartList[index]['condition']}")
+                                                : Text("-"),
+                                          ],
                                         ),
                                       ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        width: 40,
-                                        height: 40,
-                                        child: InkWell(
-                                          onTap: () {},
-                                          child: Obx(
-                                            () => Text(controller.cartList[index]['count'].toString(),
-                                                style: TextStyle(color: Colors.black54, fontSize: 40)),
-                                          ),
+                                    ),
+                                    Expanded(
+                                      flex: 8,
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              color: Colors.red,
+                                              width: 40,
+                                              height: 40,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  controller.decrementItem(index);
+                                                },
+                                                child: Icon(Icons.remove, color: Colors.white),
+                                              ),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              width: 40,
+                                              height: 40,
+                                              child: InkWell(
+                                                onTap: () {},
+                                                child: Obx(
+                                                  () => Text(controller.cartList[index]['count'].toString(),
+                                                      style: TextStyle(color: Colors.black54, fontSize: 40)),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              color: Colors.blue,
+                                              width: 40,
+                                              height: 40,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  controller.incrementItem(index);
+                                                },
+                                                child: Icon(Icons.add, color: Colors.white),
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
-                                      Container(
-                                        color: Colors.blue,
-                                        width: 40,
-                                        height: 40,
-                                        child: InkWell(
-                                          onTap: () {
-                                            controller.incrementItem(index);
-                                          },
-                                          child: Icon(Icons.add, color: Colors.white),
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
                               )
                             ],
                           ),
-                        )
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            Container(
+              width: Get.width / 1.5,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Total Harga",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Obx(
+                          () => Text(
+                            "Rp " + controller.totalPrice.toString(),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
+                          ),
+                        ),
                       ],
                     ),
                   ),
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: () {},
+                      color: Colors.orangeAccent,
+                      child: Text(
+                        "Order",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  )
                 ],
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );

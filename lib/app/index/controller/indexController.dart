@@ -84,7 +84,7 @@ class IndexController extends GetxController {
   addToCart(var data) {
     cartList.add(data);
     cartList.refresh();
-    //print(cartList);
+    print(data);
   }
 
   incrementItem(index) {
@@ -101,6 +101,8 @@ class IndexController extends GetxController {
     cartList.removeAt(index);
     cartList.refresh();
   }
+
+  double get totalPrice => cartList.fold(0, (sum, element) => sum + int.parse(element['harga']) * element['count']);
 
   @override
   void onInit() {
