@@ -49,7 +49,12 @@ class IndexView extends StatelessWidget {
                 return GridTile(
                   child: InkWell(
                     splashColor: Colors.blueAccent,
-                    onTap: () {},
+                    onTap: () {
+                      var i = controller.productList[index];
+                      var id = controller.productList[index]['id'];
+                      var count = 1;
+                      controller.addToCart(i, id, count);
+                    },
                     child: Card(
                       //color: Colors.white54,
                       child: Column(

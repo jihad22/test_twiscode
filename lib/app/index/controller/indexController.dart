@@ -26,7 +26,6 @@ class IndexController extends GetxController {
   }
 
   imageLoader(String? uri) {
-    print(uri);
     if (uri == null || uri == "") {
       return Image.asset("null-image.jpeg");
     } else {
@@ -80,6 +79,13 @@ class IndexController extends GetxController {
         ),
       );
     }
+  }
+
+  addToCart(index, id, count) {
+    var item = {'index': index, 'id': id, 'count': count};
+    cartList.add(item);
+    cartList.refresh();
+    print(cartList);
   }
 
   @override
