@@ -81,11 +81,25 @@ class IndexController extends GetxController {
     }
   }
 
-  addToCart(index, id, count) {
-    var item = {'index': index, 'id': id, 'count': count};
-    cartList.add(item);
+  addToCart(var data) {
+    cartList.add(data);
     cartList.refresh();
-    print(cartList);
+    //print(cartList);
+  }
+
+  incrementItem(index) {
+    cartList[index]['count'] += 1;
+    cartList.refresh();
+  }
+
+  decrementItem(index) {
+    cartList[index]['count'] -= 1;
+    cartList.refresh();
+  }
+
+  removeItem(index) {
+    cartList.removeAt(index);
+    cartList.refresh();
   }
 
   @override

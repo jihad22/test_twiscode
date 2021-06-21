@@ -50,10 +50,14 @@ class IndexView extends StatelessWidget {
                   child: InkWell(
                     splashColor: Colors.blueAccent,
                     onTap: () {
-                      var i = controller.productList[index];
-                      var id = controller.productList[index]['id'];
-                      var count = 1;
-                      controller.addToCart(i, id, count);
+                      var data = {
+                        "index": index,
+                        "id": controller.productList[index]['id'],
+                        "merk": controller.productList[index]['title'],
+                        "img": controller.productList[index]['default_photo']['img_path'],
+                        "count": 1
+                      };
+                      controller.addToCart(data);
                     },
                     child: Card(
                       //color: Colors.white54,
@@ -62,7 +66,7 @@ class IndexView extends StatelessWidget {
                           Container(
                             width: Get.width,
                             child: controller.imageLoader(
-                              controller.productList[index]['default_photo']['img_path'].toString(),
+                              controller.productList[index]['default_photo']['img_path'],
                             ),
                           ),
                           Container(
@@ -127,8 +131,42 @@ class IndexView extends StatelessWidget {
   }
 
   void cartBottom() {
-    Get.bottomSheet(Container(
-      child: Text("TESTING BAG"),
-    ));
+    Get.bottomSheet(
+      Container(
+        color: Colors.white,
+        child: ListView.builder(
+          itemCount: controller.cartList.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        width: 100,
+                        height: 150,
+                        child: controller.imageLoader(
+                          controller.cartList[index]['img'],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: ListTile(
+                      title: Text(controller.cartList[index]['id']),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }
