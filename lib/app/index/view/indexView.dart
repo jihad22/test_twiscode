@@ -170,55 +170,68 @@ class IndexView extends StatelessWidget {
                             children: [
                               Expanded(
                                 flex: 4,
-                                child: Column(
-                                  children: [
-                                    controller.cartList[index]['price'] == null
-                                        ? Text(
-                                            "Rp 0",
-                                            style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
-                                          )
-                                        : Text(
-                                            "Rp ${controller.cartList[index]['price'] == null}",
-                                            style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
-                                          ),
-                                    controller.cartList[index]['condition'] == ""
-                                        ? Text("${controller.cartList[index]['condition']}")
-                                        : Text("-"),
-                                  ],
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Column(
+                                    children: [
+                                      controller.cartList[index]['price'] == null
+                                          ? Text(
+                                              "Rp 0",
+                                              style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
+                                            )
+                                          : Text(
+                                              "Rp ${controller.cartList[index]['price'] == null}",
+                                              style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
+                                            ),
+                                      controller.cartList[index]['condition'] == ""
+                                          ? Text("${controller.cartList[index]['condition']}")
+                                          : Text("-"),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Expanded(
                                 flex: 8,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      color: Colors.red,
-                                      width: 40,
-                                      height: 40,
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: Icon(Icons.remove, color: Colors.white),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        color: Colors.red,
+                                        width: 40,
+                                        height: 40,
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.decrementItem(index);
+                                          },
+                                          child: Icon(Icons.remove, color: Colors.white),
+                                        ),
                                       ),
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      width: 40,
-                                      height: 40,
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: Text("2", style: TextStyle(color: Colors.black54, fontSize: 40)),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        width: 40,
+                                        height: 40,
+                                        child: InkWell(
+                                          onTap: () {},
+                                          child: Obx(
+                                            () => Text(controller.cartList[index]['count'].toString(),
+                                                style: TextStyle(color: Colors.black54, fontSize: 40)),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    Container(
-                                      color: Colors.blue,
-                                      width: 40,
-                                      height: 40,
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: Icon(Icons.add, color: Colors.white),
-                                      ),
-                                    )
-                                  ],
+                                      Container(
+                                        color: Colors.blue,
+                                        width: 40,
+                                        height: 40,
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.incrementItem(index);
+                                          },
+                                          child: Icon(Icons.add, color: Colors.white),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               )
                             ],
