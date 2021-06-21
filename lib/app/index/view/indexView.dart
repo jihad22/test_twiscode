@@ -55,6 +55,8 @@ class IndexView extends StatelessWidget {
                         "id": controller.productList[index]['id'],
                         "merk": controller.productList[index]['title'],
                         "img": controller.productList[index]['default_photo']['img_path'],
+                        "harga": controller.productList[index]['price'],
+                        "condition": controller.productList[index]['condition_of_item']['name'],
                         "count": 1
                       };
                       controller.addToCart(data);
@@ -139,8 +141,8 @@ class IndexView extends StatelessWidget {
           itemBuilder: (context, index) {
             return Card(
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
                     flex: 4,
@@ -155,10 +157,74 @@ class IndexView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Padding(padding: EdgeInsets.only(right: 10)),
                   Expanded(
                     flex: 8,
-                    child: ListTile(
-                      title: Text(controller.cartList[index]['id']),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(controller.cartList[index]['merk'], style: TextStyle(fontSize: 30)),
+                        Container(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: Column(
+                                  children: [
+                                    controller.cartList[index]['price'] == null
+                                        ? Text(
+                                            "Rp 0",
+                                            style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
+                                          )
+                                        : Text(
+                                            "Rp ${controller.cartList[index]['price'] == null}",
+                                            style: TextStyle(fontSize: 35, color: Colors.orangeAccent),
+                                          ),
+                                    controller.cartList[index]['condition'] == ""
+                                        ? Text("${controller.cartList[index]['condition']}")
+                                        : Text("-"),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 8,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      color: Colors.red,
+                                      width: 40,
+                                      height: 40,
+                                      child: InkWell(
+                                        onTap: () {},
+                                        child: Icon(Icons.remove, color: Colors.white),
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 40,
+                                      height: 40,
+                                      child: InkWell(
+                                        onTap: () {},
+                                        child: Text("2", style: TextStyle(color: Colors.black54, fontSize: 40)),
+                                      ),
+                                    ),
+                                    Container(
+                                      color: Colors.blue,
+                                      width: 40,
+                                      height: 40,
+                                      child: InkWell(
+                                        onTap: () {},
+                                        child: Icon(Icons.add, color: Colors.white),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],
